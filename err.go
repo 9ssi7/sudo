@@ -1,5 +1,7 @@
+// Package sudo provides error messages for the sudo package.
 package sudo
 
+// messages struct holds error messages for various scenarios in the sudo package.
 type messages struct {
 	FailedRedisFetch string
 	FailedRedisSet   string
@@ -14,6 +16,7 @@ type messages struct {
 	Unknown       string
 }
 
+// Messages is an instance of the messages struct with predefined error messages.
 var Messages = messages{
 	FailedRedisFetch: "sudo_redis_fetch_failed",
 	FailedRedisSet:   "sudo_redis_set_failed",

@@ -1,3 +1,4 @@
+// Package sudo provides a service for handling sudo operations.
 package sudo
 
 import (
@@ -9,13 +10,22 @@ import (
 	"github.com/google/uuid"
 )
 
+// VerifyCommand represents the command structure for the Verify operation.
 type VerifyCommand struct {
-	UserId      string
-	DeviceId    string
+	// UserId is the unique identifier of the user.
+	UserId string
+
+	// DeviceId is the unique identifier of the device.
+	DeviceId string
+
+	// VerifyToken is the token to be verified.
 	VerifyToken string
-	Code        string
+
+	// Code is the verification code to be verified.
+	Code string
 }
 
+// Verify validates the provided code and verify token for a given user and device.
 func (c *client) Verify(ctx context.Context, cmd VerifyCommand) (*string, error) {
 	e, ok, err := c.getByKey(ctx, c.calcKey(cmd.DeviceId, cmd.UserId))
 	if err != nil {

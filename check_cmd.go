@@ -1,3 +1,4 @@
+// Package sudo provides a service for handling sudo operations.
 package sudo
 
 import (
@@ -5,12 +6,19 @@ import (
 	"errors"
 )
 
+// CheckCommand represents the command structure for the Check operation.
 type CheckCommand struct {
-	UserId   string
+	// UserId is the unique identifier of the user.
+	UserId string
+
+	// DeviceId is the unique identifier of the device.
 	DeviceId string
-	Token    string
+
+	// Token is the access token to be checked.
+	Token string
 }
 
+// Check validates the provided token for a given user and device.
 func (c *client) Check(ctx context.Context, cmd CheckCommand) error {
 	e, ok, err := c.getByKey(ctx, c.calcKey(cmd.DeviceId, cmd.UserId))
 	if err != nil {

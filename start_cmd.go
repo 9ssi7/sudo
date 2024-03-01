@@ -1,3 +1,4 @@
+// Package sudo provides a service for handling sudo operations.
 package sudo
 
 import (
@@ -9,14 +10,25 @@ import (
 	"github.com/google/uuid"
 )
 
+// StartCommand represents the command structure for the Start operation.
 type StartCommand struct {
-	UserId   string
+	// UserId is the unique identifier of the user.
+	UserId string
+
+	// DeviceId is the unique identifier of the device.
 	DeviceId string
-	Phone    string
-	Email    string
-	Locale   string
+
+	// Phone is the phone number to send the code to.
+	Phone string
+
+	// Email is the email address to send the code to.
+	Email string
+
+	// Locale is the language and region to use for the notification.
+	Locale string
 }
 
+// Start initiates the sudo operation for a given user and device.
 func (c *client) Start(ctx context.Context, cmd StartCommand) (*string, error) {
 	verifyToken := uuid.New().String()
 	e := entity{
