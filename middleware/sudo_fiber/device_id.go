@@ -8,10 +8,13 @@ import (
 	"github.com/google/uuid"
 )
 
+// DeviceIdConfig holds the configuration for the device ID middleware.
 type DeviceIdConfig struct {
+	// CookieName is the name of the cookie used to store the device ID.
 	CookieName string
 }
 
+// NewDeviceId creates a new device ID middleware.
 func NewDeviceId(cnf DeviceIdConfig) fiber.Handler {
 	if cnf.CookieName == "" {
 		cnf.CookieName = "device_id"
@@ -40,6 +43,7 @@ func NewDeviceId(cnf DeviceIdConfig) fiber.Handler {
 	}
 }
 
+// DeviceIdParser represents the device ID parser.
 func DeviceIdParse(c *fiber.Ctx) string {
 	return c.Locals("device_id").(string)
 }

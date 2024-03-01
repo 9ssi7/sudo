@@ -6,16 +6,28 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+// Config holds the configuration for the sudo middleware.
 type Config struct {
-	Service      sudo.Service
-	UserParser   CurrentUserParser
+	// Service is the sudo service.
+	Service sudo.Service
+
+	// UserParser is the function used to parse the current user.
+	UserParser CurrentUserParser
+
+	// LocaleParser is the function used to parse the locale.
 	LocaleParser LocaleParser
 
+	// AccessKey is the name of the header used to store the access key.
 	AccessKey string
+
+	// VerifyKey is the name of the header used to store the verify key.
 	VerifyKey string
-	CodeKey   string
+
+	// CodeKey is the name of the header used to store the code.
+	CodeKey string
 }
 
+// New creates a new sudo middleware.
 func New(cnf Config) fiber.Handler {
 	if cnf.AccessKey == "" {
 		cnf.AccessKey = "X-Sudo-Access-KEY"
